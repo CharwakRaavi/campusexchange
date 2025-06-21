@@ -1,0 +1,338 @@
+/* Overall page container */
+.admin-dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #6a11cb 0%, #8e476f 100%);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Main card that holds the form */
+.product-form-card {
+  /* CRUCIAL CHANGE: Set background to transparent */
+  background: transparent;
+  
+  /* Apply the backdrop-filter to create the frosted glass effect on the content behind the form */
+  backdrop-filter: blur(10px); /* Adjust blur strength as needed (e.g., 8px, 12px) */
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Subtle shadow for depth */
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Thin, light border for definition */
+  width: 100%;
+  max-width: 800px;
+  color: #fff; /* White text for contrast */
+  text-align: center;
+}
+
+/* Form Header */
+.form-header {
+  margin-bottom: 30px;
+}
+
+.icon-box {
+  font-size: 3rem; /* Larger icon */
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.form-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.form-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 20px;
+}
+
+/* Form structure */
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between rows/groups */
+}
+
+.form-row {
+  display: flex;
+  gap: 20px; /* Space between columns in a row */
+  width: 100%;
+}
+
+.form-group {
+  flex: 1; /* Make form groups take equal width */
+  text-align: left; /* Align labels to the left */
+}
+
+/* Specific group sizing */
+.form-group.full-width {
+  flex: 0 0 100%; /* Product Title takes full width */
+}
+
+.description-group {
+  flex: 2; /* Description takes more space */
+}
+
+.price-group {
+  flex: 1; /* Price takes less space */
+}
+
+.bottom-row {
+  align-items: flex-start; /* Align items to the top in the bottom row */
+}
+
+.left-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+
+/* Input fields and textarea */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 10px;
+  /* Input background: These should still have some background for readability */
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white for inputs */
+  color: #fff;
+  font-size: 1rem;
+  box-sizing: border-box;
+  outline: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  background: rgba(255, 255, 255, 0.3); /* Slightly more opaque on focus */
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5); /* Highlight on focus */
+}
+
+textarea {
+  min-height: 120px; /* Make description larger */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Select dropdown specific styles */
+select {
+  -webkit-appearance: none; /* Remove default arrow on WebKit browsers */
+  -moz-appearance: none; /* Remove default arrow on Firefox */
+  appearance: none; /* Remove default arrow */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom white arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
+/* Image Upload Area */
+.image-upload-area {
+  flex: 1; /* Takes remaining space in the bottom row */
+  border: 2px dashed rgba(255, 255, 255, 0.5); /* Dashed border for drag-drop */
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+  min-height: 200px; /* Ensure enough height for the drop zone */
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.image-upload-area:hover,
+.image-upload-area.drag-over {
+  border-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly lighter background on hover/drag */
+}
+
+.upload-icon {
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 10px;
+}
+
+.image-upload-area p {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.image-upload-area .file-info {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Uploading State */
+.uploading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Uploaded Image Preview */
+.uploaded-image-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.uploaded-image-preview img {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 8px;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.1); /* Slight background for transparency */
+}
+
+.upload-success-message {
+  color: #a3ffac; /* Green success color */
+  font-weight: 500;
+}
+
+/* Preview Thumbnail (before actual upload to Cloudinary) */
+.image-preview-thumbnail {
+  margin-top: 15px;
+}
+
+.image-preview-thumbnail img {
+  max-width: 100px; /* Smaller preview for selected file */
+  max-height: 100px;
+  border-radius: 5px;
+  object-fit: contain;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Submit Button */
+.submit-button {
+  background: linear-gradient(90deg, #ff6a00, #ee0979); /* Orange to pink gradient */
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px; /* Space above the button */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.submit-button:disabled {
+  background: rgba(100, 100, 100, 0.5); /* Faded look when disabled */
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+.submit-button .icon {
+  font-size: 1.5rem;
+}
+
+/* Message Styling (Error/Success) */
+.error-message,
+.success-message {
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  text-align: center;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.error-message {
+  background-color: rgba(255, 99, 71, 0.2); /* Semi-transparent tomato */
+  color: #ff6347; /* Tomato */
+  border: 1px solid #ff6347;
+}
+
+.success-message {
+  background-color: rgba(144, 238, 144, 0.2); /* Semi-transparent lightgreen */
+  color: #90ee90; /* Lightgreen */
+  border: 1px solid #90ee90;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .product-form-card {
+    padding: 30px 20px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .bottom-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .left-column {
+    width: 100%;
+  }
+
+  .image-upload-area {
+    min-height: 150px;
+  }
+
+  .form-title {
+    font-size: 2rem;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+}

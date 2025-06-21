@@ -1,0 +1,74 @@
+body {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    align-items: center;      /* Center vertically */
+    height: 100vh;            /* Full viewport height */
+    background: linear-gradient(135deg, #f46b9c 0%, #7f7fd5 100%); /* Gradient background */
+    margin: 0;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* User/Admin Option Styling */
+.user-admin-option {
+    position: absolute; /* Position it inside the container */
+    top: 10px; /* Place it at the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Make it bold */
+    color: #007bff; /* Blue color */
+}
+
+/* Input Fields */
+input {
+    display: block;
+    width: 280px; /* Adjusted width */
+    padding: 12px; /* Adjusted padding */
+    margin: 15px auto; /* Adjusted margin and centering */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Adjusted font size */
+}
+
+/* Year Select Option */
+select.year-select {
+    display: block;
+    width: 270px; /* Increase width */
+    padding: 12px; /* Increase padding */
+    margin: 10px auto; /* Center the select field */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Increase font size */
+}
+
+/* Button Styling */
+button {
+    color: white;
+    border: none;
+    padding: 12px 25px; /* Adjusted padding */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Adjusted font size */
+    margin-top: 10px; /* Added margin top */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
