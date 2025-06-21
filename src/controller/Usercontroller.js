@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const User = require('../models/Usermodel.js'); // Correct import of the User model
 const bcrypt = require('bcrypt'); // For password hashing
 const jwt = require('jsonwebtoken');
@@ -159,7 +161,7 @@ const login = async (req, res) => {
         // Generate JWT token
         const token = jwt.sign(
             { id: user._id, role: user.role },
-            JWT_SECRET,
+            process.env.JWT_SECRET,
             { expiresIn: '24h' }
         );
 

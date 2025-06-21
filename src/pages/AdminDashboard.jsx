@@ -13,22 +13,34 @@ const AdminDashboard = () => {
     description: "",
     price: "",
     category: "",
-    imageUrl: "", // This will store the Cloudinary URL
+    imageUrl: "",
     quantity: "",
   });
   const navigate = useNavigate();
-  const fileInputRef = useRef(null); // Ref for the hidden file input
+  const fileInputRef = useRef(null);
 
+  // Check admin role
   useEffect(() => {
-    // Check if user is admin
     const role = localStorage.getItem("role");
     if (role !== "admin") {
       navigate("/login");
-      return;
     }
   }, [navigate]);
 
-  // Function to handle the actual image upload to Cloudinary
+  // Debug form validation state
+  useEffect(() => {
+    console.log("Form Validation State:", {
+      title: productData.title.trim() !== "",
+      description: productData.description.trim() !== "",
+      price: productData.price !== "" && Number(productData.price) > 0,
+      category: productData.category.trim() !== "",
+      quantity: productData.quantity !== "" && Number(productData.quantity) > 0,
+      imageUrl: productData.imageUrl.trim() !== "",
+      uploading,
+      isFormValid: isFormValid(),
+    });
+  }, [productData, uploading]);
+
   const uploadImageToCloudinary = async (fileToUpload) => {
     if (!fileToUpload) {
       setError("No file selected for upload.");
@@ -62,19 +74,18 @@ const AdminDashboard = () => {
         credentials: "include",
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to upload image");
-      }
-
       const data = await response.json();
-      console.log("Upload response:", data);
+      console.log("Cloudinary Response:", data);
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to upload image");
+      }
 
       if (data.success) {
         setSuccess("Image uploaded successfully!");
         setProductData((prev) => ({
           ...prev,
-          imageUrl: data.data.url, // Set the Cloudinary URL
+          imageUrl: data.data.secure_url || data.data.url,
         }));
       } else {
         throw new Error(data.message || "Failed to upload image");
@@ -82,7 +93,7 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error("Upload error:", error);
       setError(error.message || "Failed to upload image. Please try again.");
-      setProductData((prev) => ({ ...prev, imageUrl: "" })); // Clear imageUrl on upload failure
+      setProductData((prev) => ({ ...prev, imageUrl: "" }));
     } finally {
       setUploading(false);
     }
@@ -199,7 +210,6 @@ const AdminDashboard = () => {
         });
         window.dispatchEvent(event);
 
-        // Reset form fields and image state
         setProductData({
           title: "",
           description: "",
@@ -214,11 +224,10 @@ const AdminDashboard = () => {
           fileInputRef.current.value = "";
         }
 
-        // Navigate to user dashboard to view the new product
         setTimeout(() => {
           setSuccess("");
-          navigate("/user/dashboard"); // Redirect after success message
-        }, 2000); // Delay to show success message
+          navigate("/user/dashboard");
+        }, 2000);
       } else {
         setError(data.message || "Failed to add product");
         setTimeout(() => setError(""), 3000);
@@ -268,6 +277,9 @@ const AdminDashboard = () => {
                 onChange={handleInputChange}
                 required
               />
+              {productData.title.trim() === "" && (
+                <span className="error">Title is required</span>
+              )}
             </div>
           </div>
 
@@ -282,6 +294,9 @@ const AdminDashboard = () => {
                 onChange={handleInputChange}
                 required
               />
+              {productData.description.trim() === "" && (
+                <span className="error">Description is required</span>
+              )}
             </div>
 
             <div className="form-group price-group">
@@ -294,9 +309,12 @@ const AdminDashboard = () => {
                 value={productData.price}
                 onChange={handleInputChange}
                 required
-                min="0"
+                min="0.01"
                 step="0.01"
               />
+              {(productData.price === "" || Number(productData.price) <= 0) && (
+                <span className="error">Enter a valid price greater than 0</span>
+              )}
             </div>
           </div>
 
@@ -318,6 +336,9 @@ const AdminDashboard = () => {
                   <option value="home-decor">Home Decor</option>
                   <option value="accessories">Accessories</option>
                 </select>
+                {productData.category.trim() === "" && (
+                  <span className="error">Category is required</span>
+                )}
               </div>
 
               <div className="form-group quantity-group">
@@ -330,8 +351,11 @@ const AdminDashboard = () => {
                   value={productData.quantity}
                   onChange={handleInputChange}
                   required
-                  min="0"
+                  min="1"
                 />
+                {(productData.quantity === "" || Number(productData.quantity) <= 0) && (
+                  <span className="error">Enter a valid quantity greater than 0</span>
+                )}
               </div>
             </div>
 
@@ -382,6 +406,9 @@ const AdminDashboard = () => {
                 </div>
               )}
             </div>
+            {!productData.imageUrl && !uploading && (
+              <span className="error">Image is required</span>
+            )}
           </div>
 
           <button

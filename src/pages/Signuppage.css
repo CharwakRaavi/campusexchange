@@ -191,3 +191,11 @@ button:disabled {
 .text-muted a:hover {
     text-decoration: underline;
 }
+
+.signup-btn-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}

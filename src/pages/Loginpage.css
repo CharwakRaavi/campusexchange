@@ -166,3 +166,11 @@
     font-size: 0.9rem;
     border: 1px solid rgba(255, 87, 87, 0.3);
 }
+
+.login-btn-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+}

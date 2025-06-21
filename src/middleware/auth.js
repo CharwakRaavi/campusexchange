@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 // JWT Secret Key (should match the one in Usercontroller.js)
-const JWT_SECRET = 'campus_exchange_super_secret_key_2024_secure_token_generation';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const auth = async (req, res, next) => {
   try {

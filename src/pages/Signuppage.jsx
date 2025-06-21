@@ -196,11 +196,12 @@ const Signuppage = () => {
                         </select>
                     </div>
 
-                    <button 
+                    <div className="signup-btn-center">
+                      <button 
                         type="submit" 
-                        className="btn btn-primary btn-block"
+                        className="btn btn-primary"
                         disabled={loading}
-                    >
+                      >
                         {loading ? (
                             <>
                                 <span className="spinner"></span>
@@ -209,7 +210,8 @@ const Signuppage = () => {
                         ) : (
                             'Create Account'
                         )}
-                    </button>
+                      </button>
+                    </div>
 
                     <p className="login-link">
                         Already have an account? <Link to="/login">Sign In</Link>

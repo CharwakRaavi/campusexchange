@@ -136,20 +136,22 @@ const Loginpage = () => {
             </div>
           </div>
 
-          <button 
-            type="submit" 
-            className="btn btn-primary btn-block"
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <span className="spinner"></span>
-                Logging in...
-              </>
-            ) : (
-              'Login'
-            )}
-          </button>
+          <div className="login-btn-center">
+            <button 
+              type="submit" 
+              className="btn btn-primary"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span className="spinner"></span>
+                  Logging in...
+                </>
+              ) : (
+                'Login'
+              )}
+            </button>
+          </div>
 
           <p className="signup-link">
             Don't have an account? <Link to="/signup">Sign Up</Link>

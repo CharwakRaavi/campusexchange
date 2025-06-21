@@ -31,7 +31,7 @@ const Myorders = () => {
         const localOrders = getOrders() || [];
         console.log('📝 All orders from localStorage:', localOrders);
         
-        // Filter orders for current user with fallback
+        // Filter orders for current user with image
         const userOrders = localOrders.filter(order => {
           const hasUserId = order.userId === userId;
           const hasImage = order.productImage || (order.productId && order.productId.imageUrl);
@@ -124,7 +124,6 @@ const Myorders = () => {
   if (loading) {
     return (
       <div className="dashboard-container">
-        {/* Mobile Menu Toggle */}
         <button 
           className="mobile-menu-toggle d-md-none" 
           onClick={toggleMobileMenu}
@@ -164,7 +163,6 @@ const Myorders = () => {
   if (error) {
     return (
       <div className="dashboard-container">
-        {/* Mobile Menu Toggle */}
         <button 
           className="mobile-menu-toggle d-md-none" 
           onClick={toggleMobileMenu}
@@ -205,7 +203,6 @@ const Myorders = () => {
 
   return (
     <div className="dashboard-container">
-      {/* Mobile Menu Toggle */}
       <button 
         className="mobile-menu-toggle d-md-none" 
         onClick={toggleMobileMenu}
@@ -223,7 +220,7 @@ const Myorders = () => {
               <button onClick={handleLogout} className="logout-btn">
                 <FaSignOutAlt />
                 <span>Log Out</span>
-              </button>
+                </button>
             </li>
           </ul>
         </nav>
